@@ -28,9 +28,9 @@
    ```
    cd restaurant_list
    ```
-3. 查看專案內 package.json 檔案中的 dependencies 欄位安裝對應的 npm 套件(package)
+3. 執行 npm install 安裝所需 package
    ```
-   npm i <package>
+   npm install
    ```
 4. 安裝 nodemon 套件
 
