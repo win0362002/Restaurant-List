@@ -1,7 +1,9 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
-const restaurantList = require('./models/seeds/restaurant.json')
+//const restaurantList = require('./models/seeds/restaurant.json')
 const mongoose = require('mongoose')
+const Restaurant = require('./models/restaurant')
+const restaurant = require('./models/restaurant')
 const app = express()
 const port = 3000
 
@@ -26,15 +28,19 @@ app.use(express.static('public'))
 
 //Set routing
 app.get('/', (req, res) => {
-  res.render('index', { restaurants: restaurantList.results })
+  Restaurant.find()
+    .lean()
+    .then((restaurants) => res.render('index', { restaurants }))
+    .catch((error) => console.log(error))
 })
 
 //show restaurant info
 app.get('/restaurants/:id', (req, res) => {
-  const restaurant = restaurantList.results.find(
-    (restaurant) => req.params.id === restaurant.id.toString()
-  )
-  res.render('show', { restaurant })
+  const id = req.params.id
+  Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render('show', { restaurant }))
+    .catch((error) => console.log(error))
 })
 
 //implement search bar
