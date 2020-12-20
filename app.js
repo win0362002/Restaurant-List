@@ -1,11 +1,14 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
-//const restaurantList = require('./models/seeds/restaurant.json')
 const mongoose = require('mongoose')
 const Restaurant = require('./models/restaurant')
-const restaurant = require('./models/restaurant')
+const bodyParser = require('body-parser')
+const { urlencoded } = require('body-parser')
 const app = express()
 const port = 3000
+
+//Set body parser
+app.use(bodyParser.urlencoded({ extended: true }))
 
 //Set data base connection
 mongoose.connect('mongodb://localhost/restaurant-list', {
@@ -34,7 +37,33 @@ app.get('/', (req, res) => {
     .catch((error) => console.log(error))
 })
 
-//show restaurant info
+//Add new restaurant
+app.get('/restaurants/new', (req, res) => res.render('new'))
+
+app.post('/restaurants', (req, res) => {
+  const name = req.body.name
+  const category = req.body.category
+  const location = req.body.location
+  const phone = req.body.phone
+  const rating = req.body.rating
+  const description = req.body.description
+  const image =
+    'https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5632/06.jpg'
+
+  return Restaurant.create({
+    name,
+    category,
+    location,
+    phone,
+    rating,
+    description,
+    image,
+  })
+    .then(() => res.redirect('/'))
+    .catch((error) => console.log(error))
+})
+
+//Show restaurant info
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   Restaurant.findById(id)
@@ -43,7 +72,7 @@ app.get('/restaurants/:id', (req, res) => {
     .catch((error) => console.log(error))
 })
 
-//implement search bar
+//Implement search bar
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
   const restaurants = restaurantList.results.filter(
