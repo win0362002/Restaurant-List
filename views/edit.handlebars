@@ -1,0 +1,16 @@
+<form action="/restaurants/{{restaurant._id}}/edit" method="POST">
+  <input type="text" placeholder="請輸入餐廳名稱" name="name" value="{{restaurant.name}}" style="display:block" class="my-2">
+  <input type="text" placeholder="請輸入餐廳種類" name="category" value="{{restaurant.category}}" style="display:block"
+    class="my-2">
+  <input type="text" placeholder="請輸入餐廳地址" name="location" value="{{restaurant.location}}"
+    style="display:block; width: 500px;" class="my-2">
+  <input type="text" placeholder="請輸入餐廳電話" name="phone" value="{{restaurant.phone}}" style="display:block" class="my-2">
+  <input type="text" placeholder="請輸入餐廳評等" name="rating" value="{{restaurant.rating}}" style="display:block"
+    class="my-2">
+  <input type="text" placeholder="請輸入餐廳描述" name="description" value="{{restaurant.description}}"
+    style="display:block; width: 1000px;" class="my-2">
+  <div class="d-flex">
+    <button type="submit" class="btn btn-warning my-1">Save</button>
+    <button type="submit" class="btn btn-danger my-1 mx-2">Delete</button>
+  </div>
+</form>
