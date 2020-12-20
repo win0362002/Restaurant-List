@@ -1,5 +1,11 @@
 <h1 class="mb-1 restaurant-show-title">{{restaurant.name}}</h1>
 <div class="container">
+  <form action="/restaurants/{{restaurant._id}}/delete" method="POST">
+    <button type="submit" class="btn btn-danger my-1" style="width: 100px;">Delete</button>
+  </form>
+  <form action="/restaurants/{{restaurant._id}}/edit" method="GET">
+    <button type="submit" class="btn btn-warning my-1" style="width: 100px;">Edit</button>
+  </form>
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
 
