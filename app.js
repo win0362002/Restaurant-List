@@ -126,5 +126,5 @@ app.get('/search', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`start and listen on http://localhost:${port}/`)
+  console.log(`Start and listen on localhost:${port}/`)
 })
