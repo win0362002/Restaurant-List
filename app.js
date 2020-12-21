@@ -41,24 +41,7 @@ app.get('/', (req, res) => {
 app.get('/restaurants/new', (req, res) => res.render('new'))
 
 app.post('/restaurants', (req, res) => {
-  const name = req.body.name
-  const category = req.body.category
-  const location = req.body.location
-  const phone = req.body.phone
-  const rating = req.body.rating
-  const description = req.body.description
-  const image =
-    'https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5632/06.jpg'
-
-  return Restaurant.create({
-    name,
-    category,
-    location,
-    phone,
-    rating,
-    description,
-    image,
-  })
+  return Restaurant.create(req.body)
     .then(() => res.redirect('/'))
     .catch((error) => console.log(error))
 })
