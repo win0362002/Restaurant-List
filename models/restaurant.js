@@ -27,11 +27,11 @@ const restaurantSchema = new Schema({
   },
   image: {
     type: String,
-    required: false,
+    required: true,
   },
   google_map: {
     type: String,
-    required: false,
+    required: true,
   },
 })
 module.exports = mongoose.model('Restaurant', restaurantSchema)

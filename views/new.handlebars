@@ -1,9 +1,52 @@
 <form action="/restaurants" method="POST">
-  <input type="text" placeholder="請輸入餐廳名稱" name="name" style="display:block" required="required" class="my-2">
-  <input type="text" placeholder="請輸入餐廳種類" name="category" style="display:block" required="required" class="my-2">
-  <input type="text" placeholder="請輸入餐廳地址" name="location" style="display:block" required="required" class="my-2">
-  <input type="text" placeholder="請輸入餐廳電話" name="phone" style="display:block" required="required" class="my-2">
-  <input type="text" placeholder="請輸入餐廳評等" name="rating" style="display:block" required="required" class="my-2">
-  <input type="text" placeholder="請輸入餐廳描述" name="description" style="display:block" required="required" class="my-2">
-  <button type="submit" class="btn btn-warning my-1">Create</button>
+  <div class="input-group input-group-sm mb-1">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">餐廳名稱</span>
+    </div>
+    <input type="text" class="form-control" name="name" value="{{restaurant.name}}" required>
+  </div>
+  <div class="input-group input-group-sm mb-1">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">餐廳種類</span>
+    </div>
+    <input type="text" class="form-control" name="category" value="{{restaurant.category}}" required>
+  </div>
+  <div class="input-group input-group-sm mb-1">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">餐廳地址</span>
+    </div>
+    <input type="text" class="form-control" name="location" value="{{restaurant.location}}" required>
+  </div>
+  <div class="input-group input-group-sm mb-1">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">餐廳電話</span>
+    </div>
+    <input type="tel" class="form-control" name="phone" value="{{restaurant.phone}}" required>
+  </div>
+  <div class="input-group input-group-sm mb-1">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">餐廳評等</span>
+    </div>
+    <input type="number" class="form-control" name="rating" value="{{restaurant.rating}}" step="0.1" min="0" max="5"
+      required>
+  </div>
+  <div class="input-group input-group-sm mb-1">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">餐廳描述</span>
+    </div>
+    <input type="text" class="form-control" name="description" value="{{restaurant.description}}" required>
+  </div>
+  <div class="input-group input-group-sm mb-1">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">Google Map</span>
+    </div>
+    <input type="url" class="form-control" name="google_map" value="{{restaurant.google_map}}" required>
+  </div>
+  <div class="input-group input-group-sm mb-1">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-sm">餐廳圖片</span>
+    </div>
+    <input type="url" class=" form-control" name="image" value="{{restaurant.image}}" required>
+  </div>
+  <button type="submit" class="btn btn-warning my-1 mx-1" style="width: 100px;">Create</button>
 </form>

@@ -41,8 +41,6 @@ app.get('/', (req, res) => {
 app.get('/restaurants/new', (req, res) => res.render('new'))
 
 app.post('/restaurants', (req, res) => {
-  req.body.image =
-    'https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5632/06.jpg'
   return Restaurant.create(req.body)
     .then(() => res.redirect('/'))
     .catch((error) => console.log(error))
@@ -69,12 +67,15 @@ app.get('/restaurants/:id/edit', (req, res) => {
 
 app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
-  const name = req.body.name
-  const category = req.body.category
-  const location = req.body.location
-  const phone = req.body.phone
-  const rating = req.body.rating
-  const description = req.body.description
+  const {
+    name,
+    category,
+    location,
+    phone,
+    rating,
+    description,
+    google_map,
+  } = req.body
 
   return Restaurant.findById(id)
     .then((restaurant) => {
@@ -84,6 +85,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
       restaurant.phone = phone
       restaurant.rating = rating
       restaurant.description = description
+      restaurant.google_map = google_map
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
@@ -102,12 +104,17 @@ app.post('/restaurants/:id/delete', (req, res) => {
 //Implement search bar
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
-  const restaurants = restaurantList.results.filter(
-    (restaurant) =>
-      restaurant.name.toLowerCase().includes(keyword.toLowerCase()) ||
-      restaurant.category.toLowerCase().includes(keyword.toLowerCase())
-  )
-  res.render('index', { restaurants, keyword })
+  Restaurant.find()
+    .lean()
+    .then((restaurants) =>
+      restaurants.filter(
+        (restaurant) =>
+          restaurant.name.toLowerCase().includes(keyword.toLowerCase()) ||
+          restaurant.category.toLowerCase().includes(keyword.toLowerCase())
+      )
+    )
+    .then((restaurants) => res.render('index', { restaurants, keyword }))
+    .catch((error) => console.log(error))
 })
 
 app.listen(port, () => {
