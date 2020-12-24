@@ -3,7 +3,8 @@ const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const Restaurant = require('./models/restaurant')
 const bodyParser = require('body-parser')
-const { urlencoded } = require('body-parser')
+const methodOverride = require('method-override')
+
 const app = express()
 const port = 3000
 
@@ -22,12 +23,15 @@ db.on('error', () => console.log('mongodb error!!'))
 //Connect success info
 db.once('open', () => console.log('mongodb connected!!'))
 
-//set express template engine
+//Set express template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
-//set express static data route
+//Set express static data route
 app.use(express.static('public'))
+
+//Set method override
+app.use(methodOverride('_method'))
 
 //Set routing
 app.get('/', (req, res) => {
@@ -65,7 +69,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .catch((error) => console.log(error))
 })
 
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   const {
     name,
@@ -93,7 +97,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
 })
 
 // Delete restaurant
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then((restaurant) => restaurant.remove())
