@@ -6,6 +6,11 @@ const Restaurant = require('../../models/restaurant')
 router.get('/new', (req, res) => res.render('new'))
 
 router.post('/', (req, res) => {
+  //Add default image if user doesn't input image information
+  if (req.body.image.trim() === '') {
+    req.body.image =
+      'https://cdn.cnn.com/cnnnext/dam/assets/190710135245-12-waterfront-restaurants.jpg'
+  }
   return Restaurant.create(req.body)
     .then(() => res.redirect('/'))
     .catch((error) => console.log(error))
