@@ -11,6 +11,7 @@
 - 使用者可以新增一家餐廳的資訊
 - 使用者可以更新現有餐廳的資訊
 - 使用者可以刪除現有餐廳的資訊
+- 使用者可以選擇不同的排序條件餐廳列表，如名稱Ａ->Z、Z->A、類別、地區、評價等
 
 ## 環境建置與需求 (prerequisites)
 
@@ -18,6 +19,7 @@
 - Express v4.17.1
 - Express-handlebars v5.2.0
 - nodemon v2.0.6
+- method-override v3.0.0
 
 ## 安裝與執行步驟 (installation and execution)
 
