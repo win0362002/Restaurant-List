@@ -7,7 +7,7 @@ router.get('/:method', (req, res) => {
   const methodDescription = req.params.method.split('_')[0]
   const method = req.params.method.split('_')[1]
 
-  Restaurant.find()
+  return Restaurant.find()
     .lean()
     .sort(method)
     .then((restaurants) =>
