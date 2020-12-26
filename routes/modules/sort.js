@@ -3,25 +3,17 @@ const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
 //Implement sorting
-router.get('/:method_index', (req, res) => {
-  const methodIndex = Number(req.params.method_index)
-  const methods = [
-    { name: 'asc' },
-    { name: 'desc' },
-    { category: 'asc' },
-    { location: 'asc' },
-    { rating: 'desc' },
-  ]
-
-  const methodDescriptions = ['A -> Z', 'Z -> A', '類別', '地區', '評價']
+router.get('/:method', (req, res) => {
+  const methodDescription = req.params.method.split('_')[0]
+  const method = req.params.method.split('_')[1]
 
   Restaurant.find()
     .lean()
-    .sort(methods[methodIndex])
+    .sort(method)
     .then((restaurants) =>
       res.render('index', {
         restaurants,
-        methodDescription: methodDescriptions[methodIndex],
+        methodDescription,
       })
     )
     .catch((error) => console.log(error))
