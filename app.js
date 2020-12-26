@@ -27,22 +27,6 @@ app.use(methodOverride('_method'))
 //Set routing
 app.use(routers)
 
-//Implement search bar
-app.get('/search', (req, res) => {
-  const keyword = req.query.keyword
-  Restaurant.find()
-    .lean()
-    .then((restaurants) =>
-      restaurants.filter(
-        (restaurant) =>
-          restaurant.name.toLowerCase().includes(keyword.toLowerCase()) ||
-          restaurant.category.toLowerCase().includes(keyword.toLowerCase())
-      )
-    )
-    .then((restaurants) => res.render('index', { restaurants, keyword }))
-    .catch((error) => console.log(error))
-})
-
 app.listen(port, () => {
   console.log(`Start and listen on localhost:${port}/`)
 })
